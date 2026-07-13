@@ -10,21 +10,22 @@
 
   <style>
     :root {
-      --green-950: #0A1733;
-      --green-800: #172A52;
-      --green-700: #FA1A8E;
-      --green-600: #FF1683;
-      --green-200: #F5B5D5;
-      --green-100: #FFE4F2;
-      --green-050: #FFF5FA;
-      --blue-050: #F5F7FC;
-      --amber-050: #FFF0F7;
-      --amber-600: #B20C62;
-      --red-700: #A0004E;
+      --navy-950: #0A1733;
+      --navy-800: #172A52;
+      --pink-900: #8C084C;
+      --pink-800: #B20C62;
+      --pink-700: #FA1A8E;
+      --pink-600: #FF1683;
+      --pink-200: #F5B5D5;
+      --pink-100: #FFE4F2;
+      --pink-050: #FFF5FA;
+      --surface-alt: #FFF8FC;
+      --note-bg: #FFF0F7;
+      --error-700: #A0004E;
       --text: #0A1733;
       --muted: #4E5B73;
       --border: #E2A8C5;
-      --white: #ffffff;
+      --white: #FFFFFF;
       --shadow: 0 10px 30px rgba(10, 23, 51, 0.10);
     }
 
@@ -75,10 +76,10 @@
       display: inline-block;
       margin-bottom: 12px;
       padding: 6px 12px;
-      border: 1px solid var(--green-200);
+      border: 1px solid var(--pink-200);
       border-radius: 999px;
-      background: var(--green-100);
-      color: var(--green-800);
+      background: var(--pink-100);
+      color: var(--navy-800);
       font-size: 0.86rem;
       font-weight: 800;
       letter-spacing: 0.02em;
@@ -86,7 +87,7 @@
 
     .hero h1 {
       margin: 0;
-      color: var(--green-950);
+      color: var(--navy-950);
       font-size: clamp(1.75rem, 5vw, 2.55rem);
       line-height: 1.15;
     }
@@ -111,9 +112,9 @@
       align-items: flex-start;
       gap: 10px;
       padding: 14px;
-      border: 1px solid var(--green-200);
+      border: 1px solid var(--pink-200);
       border-radius: 12px;
-      background: var(--green-050);
+      background: var(--pink-050);
     }
 
     .guide-number,
@@ -122,8 +123,8 @@
       place-items: center;
       flex: 0 0 auto;
       border-radius: 50%;
-      background: var(--green-700);
-      color: var(--green-950);
+      background: var(--pink-800);
+      color: var(--white);
       font-weight: 900;
     }
 
@@ -135,7 +136,7 @@
 
     .guide-item strong {
       display: block;
-      color: var(--green-950);
+      color: var(--navy-950);
       margin-bottom: 2px;
     }
 
@@ -163,7 +164,7 @@
 
     h2 {
       margin: 0;
-      color: var(--green-950);
+      color: var(--navy-950);
       font-size: clamp(1.2rem, 3vw, 1.45rem);
     }
 
@@ -189,7 +190,7 @@
     label {
       display: block;
       margin-bottom: 7px;
-      color: var(--green-950);
+      color: var(--navy-950);
       font-weight: 800;
     }
 
@@ -206,7 +207,7 @@
       width: 100%;
       min-height: 50px;
       padding: 11px 12px;
-      border: 1px solid #8ea697;
+      border: 1px solid #D98AB2;
       border-radius: 10px;
       background: var(--white);
       color: var(--text);
@@ -214,15 +215,15 @@
 
     select:disabled,
     input:disabled {
-      background: #f0f3f1;
-      color: #77817b;
+      background: #FCEAF3;
+      color: #7A5368;
       cursor: not-allowed;
     }
 
     select:focus,
     input:focus,
     button:focus-visible {
-      outline: 3px solid rgba(57, 113, 83, 0.24);
+      outline: 3px solid rgba(250, 26, 142, 0.28);
       outline-offset: 2px;
     }
 
@@ -247,30 +248,33 @@
     }
 
     .primary {
-      border: 1px solid var(--green-700);
-      background: var(--green-700);
-      color: var(--green-950);
+      border: 1px solid var(--pink-800);
+      background: var(--pink-800);
+      color: var(--white);
     }
 
     .primary:hover:not(:disabled) {
-      border-color: var(--green-600);
-      background: var(--green-600);
+      border-color: var(--pink-900);
+      background: var(--pink-900);
+      color: var(--white);
     }
 
     .secondary {
-      border: 1px solid var(--green-700);
+      border: 1px solid var(--pink-700);
       background: var(--white);
-      color: var(--green-800);
+      color: var(--navy-800);
     }
 
     .secondary:hover:not(:disabled) {
-      background: var(--green-050);
+      border-color: var(--pink-800);
+      background: var(--pink-100);
+      color: var(--pink-800);
     }
 
     .quiet {
       border: 1px solid var(--border);
       background: var(--white);
-      color: var(--green-950);
+      color: var(--navy-950);
     }
 
     .result-panel {
@@ -290,33 +294,33 @@
       display: grid;
       place-items: center;
       min-height: 150px;
-      border: 2px solid var(--green-700);
-      background: var(--green-100);
+      border: 2px solid var(--pink-700);
+      background: var(--pink-100);
       text-align: center;
     }
 
     .result-label {
       margin: 0 0 4px;
-      color: var(--green-800);
+      color: var(--navy-800);
       font-weight: 800;
     }
 
     .result-value {
       margin: 0;
-      color: var(--green-950);
+      color: var(--navy-950);
       font-size: 2.75rem;
       font-weight: 900;
       line-height: 1;
     }
 
     .summary-box {
-      border: 1px solid var(--green-200);
-      background: var(--blue-050);
+      border: 1px solid var(--pink-200);
+      background: var(--surface-alt);
     }
 
     .summary-box h3 {
       margin: 0 0 10px;
-      color: var(--green-950);
+      color: var(--navy-950);
       font-size: 1rem;
     }
 
@@ -331,7 +335,7 @@
       justify-content: space-between;
       gap: 16px;
       padding: 7px 0;
-      border-bottom: 1px solid #dce5df;
+      border-bottom: 1px solid #F0D3E2;
     }
 
     .summary-list li:last-child {
@@ -343,23 +347,23 @@
     }
 
     .summary-list strong {
-      color: var(--green-950);
+      color: var(--navy-950);
       text-align: right;
     }
 
     .message {
       min-height: 23px;
       margin: 12px 0 0;
-      color: var(--red-700);
+      color: var(--error-700);
       font-weight: 800;
     }
 
     .transfer-area {
       margin-top: 16px;
       padding: 16px;
-      border: 1px dashed var(--green-600);
+      border: 1px dashed var(--pink-600);
       border-radius: 12px;
-      background: var(--green-050);
+      background: var(--pink-050);
     }
 
     .transfer-area p {
@@ -383,10 +387,10 @@
 
     .weight-pill {
       padding: 7px 11px;
-      border: 1px solid var(--green-200);
+      border: 1px solid var(--pink-200);
       border-radius: 999px;
-      background: var(--green-100);
-      color: var(--green-800);
+      background: var(--pink-100);
+      color: var(--navy-800);
       font-size: 0.9rem;
       font-weight: 800;
     }
@@ -394,9 +398,9 @@
     .help-note {
       margin-top: 18px;
       padding: 13px 15px;
-      border-left: 4px solid var(--amber-600);
-      background: var(--amber-050);
-      color: #66500c;
+      border-left: 4px solid var(--pink-800);
+      background: var(--note-bg);
+      color: #7A1547;
       font-size: 0.9rem;
     }
 
@@ -408,14 +412,14 @@
 
     .credit-card .credit-title {
       margin: 0;
-      color: var(--green-950);
+      color: var(--navy-950);
       font-size: 1.05rem;
       font-weight: 900;
     }
 
     .credit-card .credit-name {
       margin: 5px 0 0;
-      color: var(--green-800);
+      color: var(--navy-800);
       font-size: 1rem;
       font-weight: 800;
     }
@@ -431,14 +435,14 @@
       max-width: 680px;
       margin: 16px auto 0;
       padding: 12px 14px;
-      border: 1px solid var(--green-200);
+      border: 1px solid var(--pink-200);
       border-radius: 10px;
-      background: var(--green-050);
+      background: var(--pink-050);
       text-align: left;
     }
 
     summary {
-      color: var(--green-800);
+      color: var(--navy-800);
       font-weight: 800;
       cursor: pointer;
     }
@@ -465,7 +469,7 @@
     .copy-status {
       min-height: 20px;
       margin: 8px 0 0;
-      color: var(--green-800);
+      color: var(--navy-800);
       font-size: 0.85rem;
       font-weight: 800;
     }
@@ -516,7 +520,7 @@
     }
 
     .hero {
-      border-top: 7px solid var(--green-700);
+      border-top: 7px solid var(--pink-700);
     }
 
     .card {
@@ -528,12 +532,23 @@
     }
 
     .credit-card {
-      border-top: 5px solid var(--green-700);
+      border-top: 5px solid var(--pink-700);
     }
 
     ::selection {
-      background: var(--green-700);
-      color: var(--green-950);
+      background: var(--pink-800);
+      color: var(--white);
+    }
+
+    .quiet:hover:not(:disabled) {
+      border-color: var(--pink-800);
+      background: var(--pink-050);
+      color: var(--pink-800);
+    }
+
+    select:hover:not(:disabled),
+    input[type="number"]:hover:not(:disabled) {
+      border-color: var(--pink-800);
     }
 
   </style>
@@ -545,15 +560,13 @@
       <span class="tool-badge">FREE EDUCATIONAL TOOL</span>
       <h1>Grade Transmutation Calculator</h1>
       <p class="subtitle">
-        Convert an actual raw score using a 50%, 60%, 70%, or 75% cut-off,
-        calculate the CP–Examination weighted grade, and combine Lecture with Laboratory/RLE
-        according to the selected course-unit structure. Decimal scores are not rounded.
+        Transmute raw scores, calculate the CP–Examination weighted grade, and combine Lecture and Lab/RLE grades.
       </p>
 
       <div class="quick-guide" aria-label="How to use the calculator">
         <div class="guide-item">
           <span class="guide-number">1</span>
-          <span><strong>Transmute</strong>Choose the cut-off, test length, and actual score.</span>
+          <span><strong>Transmute</strong>Choose the cut-off, item total, and actual raw score.</span>
         </div>
         <div class="guide-item">
           <span class="guide-number">2</span>
@@ -714,7 +727,6 @@
           <ul class="summary-list">
             <li><span>Class Participation</span><strong id="summaryCp">—</strong></li>
             <li><span>Examination</span><strong id="summaryExam">—</strong></li>
-            <li><span>Weighting</span><strong>2 : 1</strong></li>
           </ul>
         </div>
       </div>
@@ -833,7 +845,7 @@
     </div>
 
     <footer class="credit-card">
-      <p class="credit-title">Free educational tool created by</p>
+      <p class="credit-title">Free educational tool designed by</p>
       <p class="credit-name">Ricardo Jr. Arellano · Pharmacy Educator</p>
       <p class="source-note">
         The score, CP–Examination, and Lecture–Laboratory/RLE transmutation tables are based on the referenced <em>Centro Escolar University Evaluation and Reporting of Student Achievement</em> document dated September 14, 2015. This tool was conceptualized, reviewed, and validated by Ricardo Jr. Arellano, with AI-assisted coding. It is provided as a free educational aid; official institutional policies and records remain authoritative.
@@ -842,13 +854,13 @@
       <details>
         <summary>Suggested citation for this tool</summary>
         <div class="citation-row">
-          <p class="citation-text" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 3.4) [Web application].</p>
+          <p class="citation-text" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 3.9) [Web application].</p>
           <button class="secondary" id="copyCitationButton" type="button">Copy citation</button>
         </div>
         <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
       </details>
 
-      <p class="version">Version 3.4 · 2026</p>
+      <p class="version">Version 3.9 · 2026</p>
     </footer>
   </main>
 
