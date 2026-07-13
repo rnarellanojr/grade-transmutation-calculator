@@ -4,27 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Ricardo Jr. Arellano">
-  <meta name="description" content="A free educational calculator for transmuting raw test scores using 50%, 60%, 70%, and 75% cut-offs and combining Class Participation and Examination grades.">
+  <meta name="description" content="A free educational calculator for transmuting raw test scores using 50%, 60%, 70%, and 75% cut-offs and combining Class Participation, Examination, Lecture, and Laboratory/RLE grades.">
+  <meta name="theme-color" content="#FA1A8E">
   <title>Free Grade Transmutation Calculator</title>
 
   <style>
     :root {
-      --green-950: #183528;
-      --green-800: #28563f;
-      --green-700: #397153;
-      --green-600: #4d8465;
-      --green-200: #cfe5d6;
-      --green-100: #eaf5ed;
-      --green-050: #f6fbf7;
-      --blue-050: #f3f7fb;
-      --amber-050: #fff9e8;
-      --amber-600: #9a6b00;
-      --red-700: #a12626;
-      --text: #202a24;
-      --muted: #5d6c63;
-      --border: #b8cbbf;
+      --green-950: #0A1733;
+      --green-800: #172A52;
+      --green-700: #FA1A8E;
+      --green-600: #FF1683;
+      --green-200: #F5B5D5;
+      --green-100: #FFE4F2;
+      --green-050: #FFF5FA;
+      --blue-050: #F5F7FC;
+      --amber-050: #FFF0F7;
+      --amber-600: #B20C62;
+      --red-700: #A0004E;
+      --text: #0A1733;
+      --muted: #4E5B73;
+      --border: #E2A8C5;
       --white: #ffffff;
-      --shadow: 0 10px 30px rgba(24, 53, 40, 0.09);
+      --shadow: 0 10px 30px rgba(10, 23, 51, 0.10);
     }
 
     * {
@@ -38,7 +39,7 @@
     body {
       margin: 0;
       padding: 24px;
-      background: linear-gradient(180deg, var(--green-050), #ffffff 46%);
+      background: linear-gradient(180deg, #FFF0F7, #FFFFFF 46%);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.5;
@@ -122,8 +123,8 @@
       flex: 0 0 auto;
       border-radius: 50%;
       background: var(--green-700);
-      color: var(--white);
-      font-weight: 800;
+      color: var(--green-950);
+      font-weight: 900;
     }
 
     .guide-number {
@@ -248,11 +249,12 @@
     .primary {
       border: 1px solid var(--green-700);
       background: var(--green-700);
-      color: var(--white);
+      color: var(--green-950);
     }
 
     .primary:hover:not(:disabled) {
-      background: var(--green-800);
+      border-color: var(--green-600);
+      background: var(--green-600);
     }
 
     .secondary {
@@ -512,6 +514,28 @@
         scroll-behavior: auto;
       }
     }
+
+    .hero {
+      border-top: 7px solid var(--green-700);
+    }
+
+    .card {
+      border-top: 3px solid rgba(250, 26, 142, 0.28);
+    }
+
+    .result-box {
+      box-shadow: inset 0 0 0 1px rgba(250, 26, 142, 0.08);
+    }
+
+    .credit-card {
+      border-top: 5px solid var(--green-700);
+    }
+
+    ::selection {
+      background: var(--green-700);
+      color: var(--green-950);
+    }
+
   </style>
 </head>
 
@@ -818,13 +842,13 @@
       <details>
         <summary>Suggested citation for this tool</summary>
         <div class="citation-row">
-          <p class="citation-text" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 3.3) [Web application].</p>
+          <p class="citation-text" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 3.4) [Web application].</p>
           <button class="secondary" id="copyCitationButton" type="button">Copy citation</button>
         </div>
         <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
       </details>
 
-      <p class="version">Version 3.3 · 2026</p>
+      <p class="version">Version 3.4 · 2026</p>
     </footer>
   </main>
 
