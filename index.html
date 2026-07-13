@@ -4,29 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Ricardo Jr. Arellano">
-  <meta name="description" content="A free educational calculator for transmuting raw test scores using 50%, 60%, 70%, and 75% cut-offs and combining Class Participation, Examination, Lecture, and Laboratory/RLE grades.">
+  <meta name="description" content="A free educational calculator for score transmutation, CP–Examination weighting, and Lecture–Laboratory/RLE grade combinations.">
   <meta name="theme-color" content="#FA1A8E">
-  <title>Free Grade Transmutation Calculator</title>
+  <title>Grade Transmutation Calculator</title>
 
   <style>
     :root {
-      --navy-950: #0A1733;
-      --navy-800: #172A52;
-      --pink-900: #8C084C;
-      --pink-800: #B20C62;
-      --pink-700: #FA1A8E;
-      --pink-600: #FF1683;
-      --pink-200: #F5B5D5;
-      --pink-100: #FFE4F2;
-      --pink-050: #FFF5FA;
-      --surface-alt: #FFF8FC;
-      --note-bg: #FFF0F7;
-      --error-700: #A0004E;
-      --text: #0A1733;
-      --muted: #4E5B73;
-      --border: #E2A8C5;
+      --navy: #0A1733;
+      --navy-soft: #273756;
+      --pink: #FA1A8E;
+      --pink-dark: #B20C62;
+      --pink-darker: #8C084C;
+      --pink-light: #FFE4F2;
+      --pink-soft: #FFF5FA;
+      --border: #E6B3CD;
+      --muted: #596579;
       --white: #FFFFFF;
-      --shadow: 0 10px 30px rgba(10, 23, 51, 0.10);
+      --error: #9D174D;
+      --shadow: 0 8px 24px rgba(10, 23, 51, 0.08);
     }
 
     * {
@@ -39,9 +34,9 @@
 
     body {
       margin: 0;
-      padding: 24px;
-      background: linear-gradient(180deg, #FFF0F7, #FFFFFF 46%);
-      color: var(--text);
+      padding: 20px;
+      background: linear-gradient(180deg, #FFF1F8 0, #FFFFFF 420px);
+      color: var(--navy);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.5;
     }
@@ -53,164 +48,146 @@
     }
 
     .app {
-      width: min(100%, 900px);
+      width: min(100%, 880px);
       margin: 0 auto;
     }
 
     .hero,
     .card,
-    .credit-card {
+    .footer {
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 16px;
       box-shadow: var(--shadow);
     }
 
     .hero {
-      padding: 30px;
-      margin-bottom: 20px;
+      padding: 28px;
+      margin-bottom: 18px;
       text-align: center;
+      border-top: 6px solid var(--pink);
     }
 
-    .tool-badge {
+    .badge {
       display: inline-block;
-      margin-bottom: 12px;
-      padding: 6px 12px;
-      border: 1px solid var(--pink-200);
+      margin-bottom: 10px;
+      padding: 5px 10px;
       border-radius: 999px;
-      background: var(--pink-100);
-      color: var(--navy-800);
-      font-size: 0.86rem;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      font-size: 0.8rem;
       font-weight: 800;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
     }
 
-    .hero h1 {
+    h1 {
       margin: 0;
-      color: var(--navy-950);
-      font-size: clamp(1.75rem, 5vw, 2.55rem);
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
       line-height: 1.15;
     }
 
-    .hero .subtitle {
-      max-width: 720px;
-      margin: 12px auto 0;
+    .subtitle {
+      max-width: 680px;
+      margin: 10px auto 0;
       color: var(--muted);
-      font-size: 1.02rem;
     }
 
-    .quick-guide {
+    .steps {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 22px;
       text-align: left;
     }
 
-    .guide-item {
+    .step-preview {
       display: flex;
-      align-items: flex-start;
       gap: 10px;
-      padding: 14px;
-      border: 1px solid var(--pink-200);
-      border-radius: 12px;
-      background: var(--pink-050);
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--pink-soft);
     }
 
-    .guide-number,
-    .step-number {
+    .step-preview-number,
+    .section-number {
       display: inline-grid;
       place-items: center;
       flex: 0 0 auto;
       border-radius: 50%;
-      background: var(--pink-800);
+      background: var(--pink-dark);
       color: var(--white);
       font-weight: 900;
     }
 
-    .guide-number {
-      width: 28px;
-      height: 28px;
-      font-size: 0.88rem;
+    .step-preview-number {
+      width: 27px;
+      height: 27px;
+      font-size: 0.84rem;
     }
 
-    .guide-item strong {
+    .step-preview strong {
       display: block;
-      color: var(--navy-950);
       margin-bottom: 2px;
     }
 
-    .guide-item span:last-child {
+    .step-preview span:last-child {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
     .card {
-      padding: 28px;
-      margin-bottom: 20px;
+      padding: 26px;
+      margin-bottom: 18px;
     }
 
-    .step-heading {
+    .section-heading {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
+      gap: 11px;
+      margin-bottom: 6px;
     }
 
-    .step-number {
-      width: 38px;
-      height: 38px;
+    .section-number {
+      width: 36px;
+      height: 36px;
     }
 
     h2 {
       margin: 0;
-      color: var(--navy-950);
-      font-size: clamp(1.2rem, 3vw, 1.45rem);
+      font-size: clamp(1.2rem, 3vw, 1.42rem);
     }
 
     .instruction {
-      margin: 0 0 22px 50px;
+      margin: 0 0 20px 47px;
       color: var(--muted);
     }
 
-    .field-grid {
+    .fields {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 15px;
     }
 
-    .field-grid.two {
+    .fields.two {
       grid-template-columns: repeat(2, 1fr);
-    }
-
-    .field {
-      min-width: 0;
     }
 
     label {
       display: block;
-      margin-bottom: 7px;
-      color: var(--navy-950);
+      margin-bottom: 6px;
       font-weight: 800;
-    }
-
-    .field-hint {
-      display: block;
-      min-height: 20px;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 0.82rem;
     }
 
     select,
     input[type="number"] {
       width: 100%;
-      min-height: 50px;
-      padding: 11px 12px;
+      min-height: 48px;
+      padding: 10px 12px;
       border: 1px solid #D98AB2;
-      border-radius: 10px;
+      border-radius: 9px;
       background: var(--white);
-      color: var(--text);
+      color: var(--navy);
     }
 
     select:disabled,
@@ -223,226 +200,192 @@
     select:focus,
     input:focus,
     button:focus-visible {
-      outline: 3px solid rgba(250, 26, 142, 0.28);
+      outline: 3px solid rgba(250, 26, 142, 0.25);
       outline-offset: 2px;
     }
 
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
-
-    button {
-      min-height: 48px;
-      padding: 11px 18px;
-      border-radius: 10px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: 0.48;
-      cursor: not-allowed;
-    }
-
-    .primary {
-      border: 1px solid var(--pink-800);
-      background: var(--pink-800);
-      color: var(--white);
-    }
-
-    .primary:hover:not(:disabled) {
-      border-color: var(--pink-900);
-      background: var(--pink-900);
-      color: var(--white);
-    }
-
-    .secondary {
-      border: 1px solid var(--pink-700);
-      background: var(--white);
-      color: var(--navy-800);
-    }
-
-    .secondary:hover:not(:disabled) {
-      border-color: var(--pink-800);
-      background: var(--pink-100);
-      color: var(--pink-800);
-    }
-
-    .quiet {
-      border: 1px solid var(--border);
-      background: var(--white);
-      color: var(--navy-950);
-    }
-
-    .result-panel {
-      display: grid;
-      grid-template-columns: minmax(180px, 0.8fr) minmax(250px, 1.2fr);
-      gap: 16px;
-      margin-top: 22px;
-    }
-
-    .result-box,
-    .summary-box {
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .result-box {
-      display: grid;
-      place-items: center;
-      min-height: 150px;
-      border: 2px solid var(--pink-700);
-      background: var(--pink-100);
-      text-align: center;
-    }
-
-    .result-label {
-      margin: 0 0 4px;
-      color: var(--navy-800);
-      font-weight: 800;
-    }
-
-    .result-value {
-      margin: 0;
-      color: var(--navy-950);
-      font-size: 2.75rem;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .summary-box {
-      border: 1px solid var(--pink-200);
-      background: var(--surface-alt);
-    }
-
-    .summary-box h3 {
-      margin: 0 0 10px;
-      color: var(--navy-950);
-      font-size: 1rem;
-    }
-
-    .summary-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .summary-list li {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 7px 0;
-      border-bottom: 1px solid #F0D3E2;
-    }
-
-    .summary-list li:last-child {
-      border-bottom: 0;
-    }
-
-    .summary-list span:first-child {
+    .hint {
+      display: block;
+      min-height: 18px;
+      margin-top: 5px;
       color: var(--muted);
-    }
-
-    .summary-list strong {
-      color: var(--navy-950);
-      text-align: right;
-    }
-
-    .message {
-      min-height: 23px;
-      margin: 12px 0 0;
-      color: var(--error-700);
-      font-weight: 800;
-    }
-
-    .transfer-area {
-      margin-top: 16px;
-      padding: 16px;
-      border: 1px dashed var(--pink-600);
-      border-radius: 12px;
-      background: var(--pink-050);
-    }
-
-    .transfer-area p {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .transfer-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      font-size: 0.8rem;
     }
 
     .weights {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 0 0 20px 50px;
+      margin: 0 0 18px 47px;
     }
 
-    .weight-pill {
-      padding: 7px 11px;
-      border: 1px solid var(--pink-200);
+    .pill {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
       border-radius: 999px;
-      background: var(--pink-100);
-      color: var(--navy-800);
-      font-size: 0.9rem;
+      background: var(--pink-light);
+      color: var(--pink-dark);
+      font-size: 0.86rem;
       font-weight: 800;
     }
 
-    .help-note {
-      margin-top: 18px;
-      padding: 13px 15px;
-      border-left: 4px solid var(--pink-800);
-      background: var(--note-bg);
-      color: #7A1547;
-      font-size: 0.9rem;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
     }
 
-    .credit-card {
-      padding: 24px;
-      margin-top: 20px;
+    button {
+      min-height: 46px;
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .primary {
+      border: 1px solid var(--pink-dark);
+      background: var(--pink-dark);
+      color: var(--white);
+    }
+
+    .primary:hover:not(:disabled) {
+      border-color: var(--pink-darker);
+      background: var(--pink-darker);
+    }
+
+    .secondary,
+    .quiet {
+      background: var(--white);
+    }
+
+    .secondary {
+      border: 1px solid var(--pink-dark);
+      color: var(--pink-dark);
+    }
+
+    .quiet {
+      border: 1px solid var(--border);
+      color: var(--navy);
+    }
+
+    .secondary:hover:not(:disabled),
+    .quiet:hover:not(:disabled) {
+      border-color: var(--pink-dark);
+      background: var(--pink-soft);
+      color: var(--pink-dark);
+    }
+
+    .message {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: var(--error);
+      font-weight: 800;
+    }
+
+    .result {
+      margin-top: 18px;
+      padding: 18px;
+      border: 2px solid var(--pink-dark);
+      border-radius: 12px;
+      background: var(--pink-light);
       text-align: center;
     }
 
-    .credit-card .credit-title {
+    .result-label {
       margin: 0;
-      color: var(--navy-950);
-      font-size: 1.05rem;
-      font-weight: 900;
-    }
-
-    .credit-card .credit-name {
-      margin: 5px 0 0;
-      color: var(--navy-800);
-      font-size: 1rem;
+      color: var(--pink-dark);
       font-weight: 800;
     }
 
-    .credit-card .source-note {
-      max-width: 700px;
+    .result-value {
+      margin: 3px 0 0;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .result-detail {
+      min-height: 21px;
+      margin: 7px 0 0;
+      color: var(--navy-soft);
+      font-size: 0.9rem;
+    }
+
+    .transfer {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px dashed var(--pink-dark);
+      border-radius: 10px;
+      background: var(--pink-soft);
+    }
+
+    .transfer p {
+      margin: 0 0 9px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .transfer-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .reset-all {
+      display: flex;
+      justify-content: center;
+      margin: 2px 0 18px;
+    }
+
+    .footer {
+      padding: 22px;
+      text-align: center;
+      border-top: 5px solid var(--pink);
+    }
+
+    .credit-title,
+    .credit-name {
+      margin: 0;
+      font-weight: 900;
+    }
+
+    .credit-name {
+      margin-top: 4px;
+      color: var(--pink-dark);
+    }
+
+    .source-note {
+      max-width: 720px;
       margin: 12px auto 0;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: 0.85rem;
     }
 
     details {
       max-width: 680px;
-      margin: 16px auto 0;
-      padding: 12px 14px;
-      border: 1px solid var(--pink-200);
-      border-radius: 10px;
-      background: var(--pink-050);
+      margin: 14px auto 0;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--pink-soft);
       text-align: left;
     }
 
     summary {
-      color: var(--navy-800);
+      color: var(--pink-dark);
       font-weight: 800;
       cursor: pointer;
     }
@@ -450,51 +393,49 @@
     .citation-row {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
-    .citation-text {
+    .citation {
       margin: 0;
-      padding: 10px;
+      padding: 9px;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 7px;
       background: var(--white);
-      color: var(--text);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       overflow-wrap: anywhere;
     }
 
     .copy-status {
-      min-height: 20px;
-      margin: 8px 0 0;
-      color: var(--navy-800);
-      font-size: 0.85rem;
+      min-height: 18px;
+      margin: 6px 0 0;
+      color: var(--pink-dark);
+      font-size: 0.82rem;
       font-weight: 800;
     }
 
     .version {
-      margin: 14px 0 0;
+      margin: 12px 0 0;
       color: var(--muted);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 720px) {
       body {
-        padding: 12px;
+        padding: 10px;
       }
 
       .hero,
       .card,
-      .credit-card {
-        padding: 20px;
+      .footer {
+        padding: 19px;
       }
 
-      .quick-guide,
-      .field-grid,
-      .field-grid.two,
-      .result-panel {
+      .steps,
+      .fields,
+      .fields.two {
         grid-template-columns: 1fr;
       }
 
@@ -503,7 +444,7 @@
         margin-left: 0;
       }
 
-      .button-row button,
+      .actions button,
       .transfer-buttons button {
         width: 100%;
       }
@@ -518,251 +459,163 @@
         scroll-behavior: auto;
       }
     }
-
-    .hero {
-      border-top: 7px solid var(--pink-700);
-    }
-
-    .card {
-      border-top: 3px solid rgba(250, 26, 142, 0.28);
-    }
-
-    .result-box {
-      box-shadow: inset 0 0 0 1px rgba(250, 26, 142, 0.08);
-    }
-
-    .credit-card {
-      border-top: 5px solid var(--pink-700);
-    }
-
-    ::selection {
-      background: var(--pink-800);
-      color: var(--white);
-    }
-
-    .quiet:hover:not(:disabled) {
-      border-color: var(--pink-800);
-      background: var(--pink-050);
-      color: var(--pink-800);
-    }
-
-    select:hover:not(:disabled),
-    input[type="number"]:hover:not(:disabled) {
-      border-color: var(--pink-800);
-    }
-
   </style>
 </head>
 
 <body>
   <main class="app">
     <header class="hero">
-      <span class="tool-badge">FREE EDUCATIONAL TOOL</span>
+      <span class="badge">FREE EDUCATIONAL TOOL</span>
       <h1>Grade Transmutation Calculator</h1>
       <p class="subtitle">
-        Transmute raw scores, calculate the CP–Examination weighted grade, and combine Lecture and Lab/RLE grades.
+        Transmute raw scores, calculate the CP–Examination weighted grade,
+        and combine Lecture and Lab/RLE grades.
       </p>
 
-      <div class="quick-guide" aria-label="How to use the calculator">
-        <div class="guide-item">
-          <span class="guide-number">1</span>
-          <span><strong>Transmute</strong>Choose the cut-off, item total, and actual raw score.</span>
+      <div class="steps" aria-label="Calculator steps">
+        <div class="step-preview">
+          <span class="step-preview-number">1</span>
+          <span><strong>Raw score</strong>Convert a score to its grade equivalent.</span>
         </div>
-        <div class="guide-item">
-          <span class="guide-number">2</span>
-          <span><strong>Combine CP and exam</strong>Obtain the weighted Lecture grade.</span>
+        <div class="step-preview">
+          <span class="step-preview-number">2</span>
+          <span><strong>CP and exam</strong>Calculate the weighted grade.</span>
         </div>
-        <div class="guide-item">
-          <span class="guide-number">3</span>
-          <span><strong>Select course units</strong>Choose the correct Lecture–Lab/RLE structure.</span>
-        </div>
-        <div class="guide-item">
-          <span class="guide-number">4</span>
-          <span><strong>Get the course grade</strong>Combine the Lecture and Lab/RLE grades.</span>
+        <div class="step-preview">
+          <span class="step-preview-number">3</span>
+          <span><strong>Lecture and lab</strong>Calculate the combined course grade.</span>
         </div>
       </div>
     </header>
 
     <section class="card" aria-labelledby="step1-title">
-      <div class="step-heading">
-        <span class="step-number" aria-hidden="true">1</span>
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">1</span>
         <h2 id="step1-title">Transmute a raw score</h2>
       </div>
       <p class="instruction">
         Complete the fields from left to right. Only item totals available for the selected cut-off will appear.
       </p>
 
-      <div class="field-grid">
-        <div class="field">
-          <label for="cutoff">Cut-off percentage</label>
+      <div class="fields">
+        <div>
+          <label for="cutoff">Cut-off</label>
           <select id="cutoff">
             <option value="">Choose a cut-off</option>
-            <option value="50">50% cut-off</option>
-            <option value="60">60% cut-off</option>
-            <option value="70">70% cut-off</option>
-            <option value="75">75% cut-off</option>
+            <option value="50">50%</option>
+            <option value="60">60%</option>
+            <option value="70">70%</option>
+            <option value="75">75%</option>
           </select>
-          <span class="field-hint">Required by your course or assessment policy.</span>
+          <span class="hint">Use the cut-off required by your course.</span>
         </div>
 
-        <div class="field">
-          <label for="totalItems">Total number of items</label>
+        <div>
+          <label for="totalItems">Item total</label>
           <select id="totalItems" disabled>
-            <option value="">Choose total items</option>
+            <option value="">Choose item total</option>
           </select>
-          <span class="field-hint" id="itemsHint">Choose a cut-off first.</span>
+          <span class="hint" id="itemsHint">Choose a cut-off first.</span>
         </div>
 
-        <div class="field">
+        <div>
           <label for="rawScore">Actual raw score</label>
-          <input
-            id="rawScore"
-            type="number"
-            min="0"
-            step="any"
-            inputmode="decimal"
-            placeholder="Choose total items first"
-            disabled
-          >
-          <span class="field-hint">Decimals are accepted; no rounding is applied.</span>
+          <input id="rawScore" type="number" min="0" step="any" inputmode="decimal"
+                 placeholder="Choose item total first" disabled>
+          <span class="hint">Decimals are accepted and not rounded.</span>
         </div>
       </div>
 
-      <div class="button-row">
-        <button class="primary" id="transmuteButton" type="button" disabled>
-          Show grade equivalent
-        </button>
-        <button class="quiet" id="clearScoreButton" type="button">
-          Clear this section
-        </button>
+      <div class="actions">
+        <button class="primary" id="transmuteButton" type="button" disabled>Calculate grade</button>
+        <button class="quiet" id="clearScoreButton" type="button">Clear</button>
       </div>
 
       <p class="message" id="scoreMessage" role="alert" aria-live="polite"></p>
 
-      <div class="result-panel">
-        <div class="result-box" aria-live="polite" aria-atomic="true">
-          <div>
-            <p class="result-label">Grade equivalent</p>
-            <p class="result-value" id="transmutedResult">—</p>
-          </div>
-        </div>
-
-        <div class="summary-box" aria-live="polite">
-          <h3>Transmutation summary</h3>
-          <ul class="summary-list">
-            <li><span>Cut-off</span><strong id="summaryCutoff">—</strong></li>
-            <li><span>Total items</span><strong id="summaryItems">—</strong></li>
-            <li><span>Actual score used</span><strong id="summaryScore">—</strong></li>
-          </ul>
-        </div>
+      <div class="result" aria-live="polite" aria-atomic="true">
+        <p class="result-label">Grade equivalent</p>
+        <p class="result-value" id="transmutedResult">—</p>
+        <p class="result-detail" id="transmutedDetail">Enter a raw score to begin.</p>
       </div>
 
-      <div class="transfer-area">
-        <p>
-          After obtaining a grade equivalent, send it to the second step or select the grade manually there.
-        </p>
+      <div class="transfer">
+        <p>Use the result in Step 2, or select the grade manually.</p>
         <div class="transfer-buttons">
-          <button class="secondary" id="useAsCp" type="button" disabled>
-            Set as Class Participation
-          </button>
-          <button class="secondary" id="useAsExam" type="button" disabled>
-            Set as Examination
-          </button>
+          <button class="secondary" id="useAsCp" type="button" disabled>Set as CP</button>
+          <button class="secondary" id="useAsExam" type="button" disabled>Set as Examination</button>
         </div>
       </div>
     </section>
 
     <section class="card" aria-labelledby="step2-title">
-      <div class="step-heading">
-        <span class="step-number" aria-hidden="true">2</span>
-        <h2 id="step2-title">Calculate the weighted grade</h2>
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">2</span>
+        <h2 id="step2-title">Calculate the CP–Examination grade</h2>
       </div>
 
       <div class="weights" aria-label="Grade weights">
-        <span class="weight-pill">Class Participation: weight 2</span>
-        <span class="weight-pill">Examination: weight 1</span>
+        <span class="pill">CP: weight 2</span>
+        <span class="pill">Examination: weight 1</span>
       </div>
 
-      <div class="field-grid two">
-        <div class="field">
+      <div class="fields two">
+        <div>
           <label for="cp">Class Participation grade</label>
           <select id="cp">
             <option value="">Choose CP grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="field-hint">Select manually or transfer a result from Step 1.</span>
+          <span class="hint">Select manually or transfer from Step 1.</span>
         </div>
 
-        <div class="field">
+        <div>
           <label for="exam">Examination grade</label>
           <select id="exam">
             <option value="">Choose examination grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="field-hint">Select manually or transfer a result from Step 1.</span>
+          <span class="hint">Select manually or transfer from Step 1.</span>
         </div>
       </div>
 
-      <div class="button-row">
-        <button class="primary" id="weightedButton" type="button" disabled>
-          Show weighted grade
-        </button>
-        <button class="quiet" id="clearWeightedButton" type="button">
-          Clear this section
-        </button>
+      <div class="actions">
+        <button class="primary" id="weightedButton" type="button" disabled>Calculate weighted grade</button>
+        <button class="quiet" id="clearWeightedButton" type="button">Clear</button>
       </div>
 
       <p class="message" id="weightedMessage" role="alert" aria-live="polite"></p>
 
-      <div class="result-panel">
-        <div class="result-box" aria-live="polite" aria-atomic="true">
-          <div>
-            <p class="result-label">Weighted grade</p>
-            <p class="result-value" id="weightedResult">—</p>
-          </div>
-        </div>
-
-        <div class="summary-box">
-          <h3>Weighted-grade summary</h3>
-          <ul class="summary-list">
-            <li><span>Class Participation</span><strong id="summaryCp">—</strong></li>
-            <li><span>Examination</span><strong id="summaryExam">—</strong></li>
-          </ul>
-        </div>
+      <div class="result" aria-live="polite" aria-atomic="true">
+        <p class="result-label">Weighted grade</p>
+        <p class="result-value" id="weightedResult">—</p>
+        <p class="result-detail" id="weightedDetail">Choose the CP and examination grades.</p>
       </div>
 
-      <p class="help-note">
-        The weighted grade follows the referenced CP–Examination transmutation table,
-        not ordinary decimal averaging.
+      <p class="note">
+        The result follows the referenced CP–Examination transmutation table, not ordinary decimal averaging.
       </p>
 
-      <div class="transfer-area">
-        <p>
-          For a course with a laboratory or RLE component, send this result to Step 3 as either the Lecture or Lab/RLE grade.
-        </p>
+      <div class="transfer">
+        <p>For a course with Lab/RLE, use this result in Step 3.</p>
         <div class="transfer-buttons">
-          <button class="secondary" id="useWeightedAsLecture" type="button" disabled>
-            Set weighted grade as Lecture
-          </button>
-          <button class="secondary" id="useWeightedAsLab" type="button" disabled>
-            Set weighted grade as Lab/RLE
-          </button>
+          <button class="secondary" id="useWeightedAsLecture" type="button" disabled>Set as Lecture</button>
+          <button class="secondary" id="useWeightedAsLab" type="button" disabled>Set as Lab/RLE</button>
         </div>
       </div>
     </section>
 
-
     <section class="card" aria-labelledby="step3-title">
-      <div class="step-heading">
-        <span class="step-number" aria-hidden="true">3</span>
-        <h2 id="step3-title">Combine Lecture and Laboratory/RLE grades</h2>
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">3</span>
+        <h2 id="step3-title">Combine Lecture and Lab/RLE grades</h2>
       </div>
       <p class="instruction">
-        Choose the course-unit structure first, then select the Lecture and Laboratory/RLE grades.
+        Choose the course-unit structure and the two component grades.
       </p>
 
-      <div class="field-grid">
-        <div class="field">
+      <div class="fields">
+        <div>
           <label for="courseCombination">Course-unit structure</label>
           <select id="courseCombination">
             <option value="">Choose course units</option>
@@ -782,85 +635,70 @@
               <option value="5u_3_2">3 units Lec + 2 units Lab/RLE</option>
             </optgroup>
           </select>
-          <span class="field-hint">Use the structure stated in the official course plan.</span>
+          <span class="hint">Use the structure in the official course plan.</span>
         </div>
 
-        <div class="field">
+        <div>
           <label for="lectureGrade">Lecture grade</label>
           <select id="lectureGrade">
             <option value="">Choose Lecture grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="field-hint">Select manually or transfer the result from Step 2.</span>
+          <span class="hint">Select manually or transfer from Step 2.</span>
         </div>
 
-        <div class="field">
-          <label for="labGrade">Laboratory/RLE grade</label>
+        <div>
+          <label for="labGrade">Lab/RLE grade</label>
           <select id="labGrade">
             <option value="">Choose Lab/RLE grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="field-hint">Select manually or transfer the result from Step 2.</span>
+          <span class="hint">Select manually or transfer from Step 2.</span>
         </div>
       </div>
 
-      <div class="button-row">
-        <button class="primary" id="courseGradeButton" type="button" disabled>
-          Show combined course grade
-        </button>
-        <button class="quiet" id="clearCourseButton" type="button">
-          Clear this section
-        </button>
+      <div class="actions">
+        <button class="primary" id="courseGradeButton" type="button" disabled>Calculate course grade</button>
+        <button class="quiet" id="clearCourseButton" type="button">Clear</button>
       </div>
 
       <p class="message" id="courseMessage" role="alert" aria-live="polite"></p>
 
-      <div class="result-panel">
-        <div class="result-box" aria-live="polite" aria-atomic="true">
-          <div>
-            <p class="result-label">Combined course grade</p>
-            <p class="result-value" id="courseGradeResult">—</p>
-          </div>
-        </div>
-
-        <div class="summary-box">
-          <h3>Lecture–Lab/RLE summary</h3>
-          <ul class="summary-list">
-            <li><span>Total course units</span><strong id="summaryCourseUnits">—</strong></li>
-            <li><span>Unit combination</span><strong id="summaryUnitCombination">—</strong></li>
-            <li><span>Lecture grade</span><strong id="summaryLectureGrade">—</strong></li>
-            <li><span>Lab/RLE grade</span><strong id="summaryLabGrade">—</strong></li>
-          </ul>
-        </div>
+      <div class="result" aria-live="polite" aria-atomic="true">
+        <p class="result-label">Combined course grade</p>
+        <p class="result-value" id="courseGradeResult">—</p>
+        <p class="result-detail" id="courseGradeDetail">Choose the course units and component grades.</p>
       </div>
 
-      <p class="help-note">
-        The combined grade follows the referenced Lecture–Laboratory/RLE transmutation table
-        for the selected unit combination, not ordinary decimal averaging.
+      <p class="note">
+        The result follows the referenced Lecture–Laboratory/RLE transmutation table for the selected unit combination.
       </p>
     </section>
 
-    <div class="button-row" style="justify-content:center;">
-      <button class="quiet" id="resetAllButton" type="button">Reset the entire calculator</button>
+    <div class="reset-all">
+      <button class="quiet" id="resetAllButton" type="button">Reset entire calculator</button>
     </div>
 
-    <footer class="credit-card">
+    <footer class="footer">
       <p class="credit-title">Free educational tool designed by</p>
       <p class="credit-name">Ricardo Jr. Arellano · Pharmacy Educator</p>
       <p class="source-note">
-        The score, CP–Examination, and Lecture–Laboratory/RLE transmutation tables are based on the referenced <em>Centro Escolar University Evaluation and Reporting of Student Achievement</em> document dated September 14, 2015. This tool was conceptualized, reviewed, and validated by Ricardo Jr. Arellano, with AI-assisted coding. It is provided as a free educational aid; official institutional policies and records remain authoritative.
+        The score, CP–Examination, and Lecture–Laboratory/RLE transmutation tables are based on the
+        <em>Centro Escolar University Evaluation and Reporting of Student Achievement</em> document dated September 14, 2015.
+        This tool was designed and reviewed by Ricardo Jr. Arellano, with AI-assisted coding.
+        It is provided as a free educational aid; official institutional policies and records remain authoritative.
       </p>
 
       <details>
-        <summary>Suggested citation for this tool</summary>
+        <summary>Suggested citation</summary>
         <div class="citation-row">
-          <p class="citation-text" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 3.9) [Web application].</p>
-          <button class="secondary" id="copyCitationButton" type="button">Copy citation</button>
+          <p class="citation" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 1.1) [Web application].</p>
+          <button class="secondary" id="copyCitationButton" type="button">Copy</button>
         </div>
         <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
       </details>
 
-      <p class="version">Version 3.9 · 2026</p>
+      <p class="version">Version 1.1 · 2026</p>
     </footer>
   </main>
 
@@ -877,24 +715,19 @@
     const totalItems = document.getElementById("totalItems");
     const rawScore = document.getElementById("rawScore");
     const transmuteButton = document.getElementById("transmuteButton");
-    const clearScoreButton = document.getElementById("clearScoreButton");
     const transmutedResult = document.getElementById("transmutedResult");
+    const transmutedDetail = document.getElementById("transmutedDetail");
     const scoreMessage = document.getElementById("scoreMessage");
     const itemsHint = document.getElementById("itemsHint");
     const useAsCp = document.getElementById("useAsCp");
     const useAsExam = document.getElementById("useAsExam");
 
-    const summaryCutoff = document.getElementById("summaryCutoff");
-    const summaryItems = document.getElementById("summaryItems");
-    const summaryScore = document.getElementById("summaryScore");
-
-    const cpSelect = document.getElementById("cp");
-    const examSelect = document.getElementById("exam");
+    const cp = document.getElementById("cp");
+    const exam = document.getElementById("exam");
     const weightedButton = document.getElementById("weightedButton");
     const weightedResult = document.getElementById("weightedResult");
+    const weightedDetail = document.getElementById("weightedDetail");
     const weightedMessage = document.getElementById("weightedMessage");
-    const summaryCp = document.getElementById("summaryCp");
-    const summaryExam = document.getElementById("summaryExam");
     const useWeightedAsLecture = document.getElementById("useWeightedAsLecture");
     const useWeightedAsLab = document.getElementById("useWeightedAsLab");
 
@@ -903,250 +736,170 @@
     const labGrade = document.getElementById("labGrade");
     const courseGradeButton = document.getElementById("courseGradeButton");
     const courseGradeResult = document.getElementById("courseGradeResult");
+    const courseGradeDetail = document.getElementById("courseGradeDetail");
     const courseMessage = document.getElementById("courseMessage");
-    const summaryCourseUnits = document.getElementById("summaryCourseUnits");
-    const summaryUnitCombination = document.getElementById("summaryUnitCombination");
-    const summaryLectureGrade = document.getElementById("summaryLectureGrade");
-    const summaryLabGrade = document.getElementById("summaryLabGrade");
 
     let latestTransmutedGrade = "";
     let latestWeightedGrade = "";
 
-    function resetTransmutationDisplay() {
+    function clearTransmutedResult() {
       latestTransmutedGrade = "";
       transmutedResult.textContent = "—";
+      transmutedDetail.textContent = "Enter a raw score to begin.";
       scoreMessage.textContent = "";
-      summaryCutoff.textContent = cutoff.value ? cutoff.value + "%" : "—";
-      summaryItems.textContent = totalItems.value || "—";
-      summaryScore.textContent = rawScore.value || "—";
       useAsCp.disabled = true;
       useAsExam.disabled = true;
     }
 
-    function populateItemOptions() {
-      const selectedCutoff = cutoff.value;
-
-      totalItems.innerHTML = '<option value="">Choose total items</option>';
+    function populateItemTotals() {
+      totalItems.innerHTML = '<option value="">Choose item total</option>';
+      totalItems.disabled = true;
       rawScore.value = "";
       rawScore.disabled = true;
-      rawScore.placeholder = "Choose total items first";
+      rawScore.placeholder = "Choose item total first";
       transmuteButton.disabled = true;
+      clearTransmutedResult();
 
-      if (!selectedCutoff) {
-        totalItems.disabled = true;
+      if (!cutoff.value) {
         itemsHint.textContent = "Choose a cut-off first.";
-        resetTransmutationDisplay();
         return;
       }
 
-      itemSets[selectedCutoff].forEach((count) => {
+      itemSets[cutoff.value].forEach((count) => {
         const option = document.createElement("option");
         option.value = String(count);
-        option.textContent = count + " items";
+        option.textContent = String(count);
         totalItems.appendChild(option);
       });
 
       totalItems.disabled = false;
-      itemsHint.textContent = "Available totals are based on the selected cut-off.";
-      resetTransmutationDisplay();
-      totalItems.focus();
+      itemsHint.textContent = "Available totals depend on the selected cut-off.";
     }
 
-    function enableScoreInput() {
-      const selectedTotal = Number(totalItems.value);
-
+    function updateRawScoreField() {
       rawScore.value = "";
-      resetTransmutationDisplay();
+      clearTransmutedResult();
 
-      if (!selectedTotal) {
+      if (!totalItems.value) {
         rawScore.disabled = true;
         rawScore.removeAttribute("max");
-        rawScore.placeholder = "Choose total items first";
+        rawScore.placeholder = "Choose item total first";
         transmuteButton.disabled = true;
         return;
       }
 
       rawScore.disabled = false;
-      rawScore.max = String(selectedTotal);
-      rawScore.placeholder = "Enter 0 to " + selectedTotal;
+      rawScore.max = totalItems.value;
+      rawScore.placeholder = "0 to " + totalItems.value;
       transmuteButton.disabled = false;
-      summaryItems.textContent = String(selectedTotal);
-      rawScore.focus();
     }
 
-    function getTransmutedGrade(selectedCutoff, selectedTotal, score) {
-      // Requested handling for the overlapping 60% / 30-item table entry.
+    function findTransmutedGrade(selectedCutoff, selectedTotal, score) {
       if (selectedCutoff === "60" && selectedTotal === "30" && score === 26) {
         return "1.75";
       }
 
       const thresholds = scoreThresholds[selectedCutoff]?.[selectedTotal];
-      if (!thresholds) return "";
-
-      const match = thresholds.find((row) => score >= row[1]);
+      const match = thresholds?.find((row) => score >= row[1]);
       return match ? match[0] : "";
     }
 
-    function transmuteScore() {
+    function calculateTransmutedGrade() {
       const selectedCutoff = cutoff.value;
       const selectedTotal = totalItems.value;
       const scoreText = rawScore.value.trim();
       const score = Number(scoreText);
 
-      resetTransmutationDisplay();
+      clearTransmutedResult();
 
-      if (!selectedCutoff) {
-        scoreMessage.textContent = "Choose a cut-off percentage.";
-        cutoff.focus();
-        return;
-      }
-
-      if (!selectedTotal) {
-        scoreMessage.textContent = "Choose the total number of items.";
-        totalItems.focus();
+      if (!selectedCutoff || !selectedTotal) {
+        scoreMessage.textContent = "Choose the cut-off and item total.";
         return;
       }
 
       if (scoreText === "") {
-        scoreMessage.textContent = "Enter the student's actual raw score.";
+        scoreMessage.textContent = "Enter the actual raw score.";
         rawScore.focus();
         return;
       }
 
       if (!Number.isFinite(score) || score < 0 || score > Number(selectedTotal)) {
-        scoreMessage.textContent =
-          "Enter a score from 0 to " + selectedTotal + ". Decimal values are accepted.";
+        scoreMessage.textContent = "Enter a score from 0 to " + selectedTotal + ".";
         rawScore.focus();
         return;
       }
 
-      const grade = getTransmutedGrade(selectedCutoff, selectedTotal, score);
+      const grade = findTransmutedGrade(selectedCutoff, selectedTotal, score);
 
       if (!grade) {
-        scoreMessage.textContent = "No grade equivalent was found for this score.";
+        scoreMessage.textContent = "No grade equivalent was found.";
         return;
       }
 
       latestTransmutedGrade = grade;
       transmutedResult.textContent = grade;
-      summaryCutoff.textContent = selectedCutoff + "%";
-      summaryItems.textContent = selectedTotal;
-      summaryScore.textContent = scoreText + " / " + selectedTotal;
+      transmutedDetail.textContent =
+        scoreText + " of " + selectedTotal + " items · " + selectedCutoff + "% cut-off";
       useAsCp.disabled = false;
       useAsExam.disabled = false;
     }
 
     function clearScoreSection() {
       cutoff.value = "";
-      totalItems.innerHTML = '<option value="">Choose total items</option>';
+      totalItems.innerHTML = '<option value="">Choose item total</option>';
       totalItems.disabled = true;
       rawScore.value = "";
       rawScore.disabled = true;
       rawScore.removeAttribute("max");
-      rawScore.placeholder = "Choose total items first";
-      transmuteButton.disabled = true;
+      rawScore.placeholder = "Choose item total first";
       itemsHint.textContent = "Choose a cut-off first.";
-      resetTransmutationDisplay();
-      cutoff.focus();
+      transmuteButton.disabled = true;
+      clearTransmutedResult();
     }
 
-    function updateWeightedButton() {
-      weightedButton.disabled = !(cpSelect.value && examSelect.value);
-      summaryCp.textContent = cpSelect.value || "—";
-      summaryExam.textContent = examSelect.value || "—";
-
-      if (!(cpSelect.value && examSelect.value)) {
-        latestWeightedGrade = "";
-        weightedResult.textContent = "—";
-        weightedMessage.textContent = "";
-        useWeightedAsLecture.disabled = true;
+    function updateWeightedState() {
+      weightedButton.disabled = !(cp.value && exam.value);
+      latestWeightedGrade = "";
+      weightedResult.textContent = "—";
+      weightedDetail.textContent = "Choose the CP and examination grades.";
+      weightedMessage.textContent = "";
+      useWeightedAsLecture.disabled = true;
       useWeightedAsLab.disabled = true;
-        useWeightedAsLab.disabled = true;
-      }
     }
 
     function calculateWeightedGrade() {
-      const cpGrade = cpSelect.value;
-      const examGrade = examSelect.value;
-
-      if (!cpGrade || !examGrade) {
-        latestWeightedGrade = "";
-        weightedResult.textContent = "—";
-        weightedMessage.textContent =
-          "Choose both the Class Participation and Examination grades.";
-        useWeightedAsLecture.disabled = true;
-      useWeightedAsLab.disabled = true;
-        useWeightedAsLab.disabled = true;
+      if (!cp.value || !exam.value) {
+        weightedMessage.textContent = "Choose both grades.";
         return;
       }
 
-      const examIndex = examOrder.indexOf(examGrade);
-      const result = weightedTable[cpGrade]?.[examIndex];
+      const examIndex = examOrder.indexOf(exam.value);
+      const result = weightedTable[cp.value]?.[examIndex];
 
       if (!result) {
-        latestWeightedGrade = "";
-        weightedResult.textContent = "—";
-        weightedMessage.textContent = "The selected grade combination is invalid.";
-        useWeightedAsLecture.disabled = true;
-      useWeightedAsLab.disabled = true;
-        useWeightedAsLab.disabled = true;
+        weightedMessage.textContent = "The selected combination is invalid.";
         return;
       }
 
       latestWeightedGrade = result;
       weightedResult.textContent = result;
+      weightedDetail.textContent = "CP " + cp.value + " · Examination " + exam.value;
       weightedMessage.textContent = "";
-      summaryCp.textContent = cpGrade;
-      summaryExam.textContent = examGrade;
       useWeightedAsLecture.disabled = false;
       useWeightedAsLab.disabled = false;
     }
 
     function clearWeightedSection() {
-      cpSelect.value = "";
-      examSelect.value = "";
-      latestWeightedGrade = "";
-      weightedResult.textContent = "—";
-      weightedMessage.textContent = "";
-      useWeightedAsLecture.disabled = true;
-      useWeightedAsLab.disabled = true;
-      updateWeightedButton();
-      cpSelect.focus();
+      cp.value = "";
+      exam.value = "";
+      updateWeightedState();
     }
 
-    function assignGrade(target) {
-      if (!latestTransmutedGrade) return;
-
-      if (target === "cp") {
-        cpSelect.value = latestTransmutedGrade;
-      } else {
-        examSelect.value = latestTransmutedGrade;
-      }
-
-      updateWeightedButton();
-
-      if (cpSelect.value && examSelect.value) {
-        calculateWeightedGrade();
-      }
-
-      document.getElementById("step2-title").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    function updateCourseGradeButton() {
+    function updateCourseState() {
       courseGradeButton.disabled =
         !(courseCombination.value && lectureGrade.value && labGrade.value);
-
-      const info = combinationInfo[courseCombination.value];
-
-      summaryCourseUnits.textContent = info ? info.total : "—";
-      summaryUnitCombination.textContent = info ? info.label : "—";
-      summaryLectureGrade.textContent = lectureGrade.value || "—";
-      summaryLabGrade.textContent = labGrade.value || "—";
-
       courseGradeResult.textContent = "—";
+      courseGradeDetail.textContent = "Choose the course units and component grades.";
       courseMessage.textContent = "";
     }
 
@@ -1156,40 +909,46 @@
       const laboratory = labGrade.value;
 
       if (!combination || !lecture || !laboratory) {
-        courseGradeResult.textContent = "—";
-        courseMessage.textContent =
-          "Choose the course-unit structure, Lecture grade, and Laboratory/RLE grade.";
+        courseMessage.textContent = "Complete all three fields.";
         return;
       }
 
-      const laboratoryIndex = lectureLabOrder.indexOf(laboratory);
-      const result = lectureLabTables[combination]?.[lecture]?.[laboratoryIndex];
+      const labIndex = lectureLabOrder.indexOf(laboratory);
+      const result = lectureLabTables[combination]?.[lecture]?.[labIndex];
       const info = combinationInfo[combination];
 
       if (!result || !info) {
-        courseGradeResult.textContent = "—";
-        courseMessage.textContent = "The selected Lecture–Lab/RLE combination is invalid.";
+        courseMessage.textContent = "The selected combination is invalid.";
         return;
       }
 
       courseGradeResult.textContent = result;
+      courseGradeDetail.textContent =
+        info.label + " · Lec " + lecture + " · Lab/RLE " + laboratory;
       courseMessage.textContent = "";
-      summaryCourseUnits.textContent = info.total;
-      summaryUnitCombination.textContent = info.label;
-      summaryLectureGrade.textContent = lecture;
-      summaryLabGrade.textContent = laboratory;
     }
 
     function clearCourseSection() {
       courseCombination.value = "";
       lectureGrade.value = "";
       labGrade.value = "";
-      courseGradeResult.textContent = "—";
-      courseMessage.textContent = "";
-      updateCourseGradeButton();
+      updateCourseState();
     }
 
-    function assignWeightedGradeToCourseComponent(target) {
+    function transferStep1(target) {
+      if (!latestTransmutedGrade) return;
+
+      if (target === "cp") {
+        cp.value = latestTransmutedGrade;
+      } else {
+        exam.value = latestTransmutedGrade;
+      }
+
+      updateWeightedState();
+      document.getElementById("step2-title").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function transferStep2(target) {
       if (!latestWeightedGrade) return;
 
       if (target === "lecture") {
@@ -1198,16 +957,8 @@
         labGrade.value = latestWeightedGrade;
       }
 
-      updateCourseGradeButton();
-
-      if (courseCombination.value && lectureGrade.value && labGrade.value) {
-        calculateCourseGrade();
-      }
-
-      document.getElementById("step3-title").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      updateCourseState();
+      document.getElementById("step3-title").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     function resetAll() {
@@ -1218,65 +969,39 @@
     }
 
     async function copyCitation() {
-      const citation = document.getElementById("citationText").textContent;
-      const copyStatus = document.getElementById("copyStatus");
+      const text = document.getElementById("citationText").textContent;
+      const status = document.getElementById("copyStatus");
 
       try {
-        await navigator.clipboard.writeText(citation);
-        copyStatus.textContent = "Citation copied.";
+        await navigator.clipboard.writeText(text);
+        status.textContent = "Citation copied.";
       } catch (error) {
-        copyStatus.textContent = "Select and copy the citation text manually.";
+        status.textContent = "Select and copy the citation manually.";
       }
     }
 
-    cutoff.addEventListener("change", populateItemOptions);
-    totalItems.addEventListener("change", enableScoreInput);
-
-    rawScore.addEventListener("input", () => {
-      resetTransmutationDisplay();
-      summaryScore.textContent = rawScore.value || "—";
-    });
-
+    cutoff.addEventListener("change", populateItemTotals);
+    totalItems.addEventListener("change", updateRawScoreField);
+    rawScore.addEventListener("input", clearTransmutedResult);
     rawScore.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" && !transmuteButton.disabled) {
-        transmuteScore();
-      }
+      if (event.key === "Enter" && !transmuteButton.disabled) calculateTransmutedGrade();
     });
 
-    transmuteButton.addEventListener("click", transmuteScore);
-    clearScoreButton.addEventListener("click", clearScoreSection);
+    transmuteButton.addEventListener("click", calculateTransmutedGrade);
+    document.getElementById("clearScoreButton").addEventListener("click", clearScoreSection);
+    useAsCp.addEventListener("click", () => transferStep1("cp"));
+    useAsExam.addEventListener("click", () => transferStep1("exam"));
 
-    useAsCp.addEventListener("click", () => assignGrade("cp"));
-    useAsExam.addEventListener("click", () => assignGrade("exam"));
-
-    cpSelect.addEventListener("change", () => {
-      updateWeightedButton();
-      if (cpSelect.value && examSelect.value) calculateWeightedGrade();
-    });
-
-    examSelect.addEventListener("change", () => {
-      updateWeightedButton();
-      if (cpSelect.value && examSelect.value) calculateWeightedGrade();
-    });
-
+    cp.addEventListener("change", updateWeightedState);
+    exam.addEventListener("change", updateWeightedState);
     weightedButton.addEventListener("click", calculateWeightedGrade);
     document.getElementById("clearWeightedButton").addEventListener("click", clearWeightedSection);
-    useWeightedAsLecture.addEventListener("click", () => assignWeightedGradeToCourseComponent("lecture"));
-    useWeightedAsLab.addEventListener("click", () => assignWeightedGradeToCourseComponent("lab"));
+    useWeightedAsLecture.addEventListener("click", () => transferStep2("lecture"));
+    useWeightedAsLab.addEventListener("click", () => transferStep2("lab"));
 
-    courseCombination.addEventListener("change", updateCourseGradeButton);
-    lectureGrade.addEventListener("change", () => {
-      updateCourseGradeButton();
-      if (courseCombination.value && lectureGrade.value && labGrade.value) {
-        calculateCourseGrade();
-      }
-    });
-    labGrade.addEventListener("change", () => {
-      updateCourseGradeButton();
-      if (courseCombination.value && lectureGrade.value && labGrade.value) {
-        calculateCourseGrade();
-      }
-    });
+    courseCombination.addEventListener("change", updateCourseState);
+    lectureGrade.addEventListener("change", updateCourseState);
+    labGrade.addEventListener("change", updateCourseState);
     courseGradeButton.addEventListener("click", calculateCourseGrade);
     document.getElementById("clearCourseButton").addEventListener("click", clearCourseSection);
 
