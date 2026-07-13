@@ -351,9 +351,9 @@
     }
 
     .footer {
-      padding: 22px;
+      padding: 14px 16px;
       text-align: center;
-      border-top: 5px solid var(--pink);
+      border-top: 4px solid var(--pink);
     }
 
     .credit-title,
@@ -363,25 +363,28 @@
     }
 
     .credit-name {
-      margin-top: 4px;
+      margin-top: 2px;
       color: var(--pink-dark);
+      font-size: 0.94rem;
     }
 
     .source-note {
-      max-width: 720px;
-      margin: 12px auto 0;
+      margin: 7px 0 0;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      text-align: left;
     }
 
     details {
       max-width: 680px;
-      margin: 14px auto 0;
-      padding: 11px 13px;
+      margin: 8px auto 0;
+      padding: 8px 10px;
       border: 1px solid var(--border);
-      border-radius: 9px;
+      border-radius: 8px;
       background: var(--pink-soft);
       text-align: left;
+      font-size: 0.82rem;
     }
 
     summary {
@@ -393,33 +396,61 @@
     .citation-row {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
-      margin-top: 10px;
+      margin-top: 7px;
     }
 
     .citation {
       margin: 0;
-      padding: 9px;
+      padding: 7px 8px;
       border: 1px solid var(--border);
       border-radius: 7px;
       background: var(--white);
-      font-size: 0.86rem;
+      font-size: 0.78rem;
+      line-height: 1.35;
       overflow-wrap: anywhere;
     }
 
     .copy-status {
-      min-height: 18px;
-      margin: 6px 0 0;
+      min-height: 14px;
+      margin: 4px 0 0;
       color: var(--pink-dark);
-      font-size: 0.82rem;
+      font-size: 0.76rem;
       font-weight: 800;
     }
 
+    .feedback-link {
+      margin: 7px 0 0;
+      font-size: 0.8rem;
+    }
+
+    .feedback-link a {
+      color: var(--pink-dark);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .feedback-link a:hover,
+    .feedback-link a:focus {
+      color: var(--pink-darker);
+    }
+
+    .footer details + details {
+      margin-top: 6px;
+    }
+
+    .citation-row .secondary {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+    }
+
     .version {
-      margin: 12px 0 0;
+      margin: 7px 0 0;
       color: var(--muted);
-      font-size: 0.76rem;
+      font-size: 0.7rem;
     }
 
     @media (max-width: 720px) {
@@ -468,8 +499,7 @@
       <span class="badge">FREE EDUCATIONAL TOOL</span>
       <h1>Grade Transmutation Calculator</h1>
       <p class="subtitle">
-        Transmute raw scores, calculate the CP–Examination weighted grade,
-        and combine Lecture and Lab/RLE grades.
+        Transmute raw scores, calculate the Class Participation (CP)–Examination weighted grade, and combine Lecture and Lab/RLE grades.
       </p>
 
       <div class="steps" aria-label="Calculator steps">
@@ -680,25 +710,34 @@
     </div>
 
     <footer class="footer">
-      <p class="credit-title">Free educational tool designed by</p>
+      <p class="credit-title">Designed by</p>
       <p class="credit-name">Ricardo Jr. Arellano · Pharmacy Educator</p>
-      <p class="source-note">
-        The score, CP–Examination, and Lecture–Laboratory/RLE transmutation tables are based on the
-        <em>Centro Escolar University Evaluation and Reporting of Student Achievement</em> document dated September 14, 2015.
-        This tool was designed and reviewed by Ricardo Jr. Arellano, with AI-assisted coding.
-        It is provided as a free educational aid; official institutional policies and records remain authoritative.
+
+      <p class="feedback-link">
+        <a href="mailto:rnarellano@ceu.edu.ph?subject=Grade%20Transmutation%20Calculator%20Feedback">
+          Send comments or suggestions
+        </a>
       </p>
+
+      <details>
+        <summary>About this tool</summary>
+        <p class="source-note">
+          Transmutation tables are based on Centro Escolar University’s
+          <em>Evaluation and Reporting of Student Achievement</em> dated September 14, 2015.
+          AI-assisted coding was used. For educational use only; official institutional policies and records prevail.
+        </p>
+      </details>
 
       <details>
         <summary>Suggested citation</summary>
         <div class="citation-row">
-          <p class="citation" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 1.1) [Web application].</p>
+          <p class="citation" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 1.0) [Web application].</p>
           <button class="secondary" id="copyCitationButton" type="button">Copy</button>
         </div>
         <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
       </details>
 
-      <p class="version">Version 1.1 · 2026</p>
+      <p class="version">Version 1.0 · 2026</p>
     </footer>
   </main>
 
