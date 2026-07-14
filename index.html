@@ -92,42 +92,6 @@
       color: var(--muted);
     }
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 22px;
-      text-align: left;
-    }
-
-    .step-preview {
-      display: flex;
-      gap: 10px;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      background: var(--pink-soft);
-      color: var(--navy);
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.15s ease, border-color 0.15s ease,
-                  background 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .step-preview:hover {
-      transform: translateY(-2px);
-      border-color: var(--pink-dark);
-      background: var(--pink-light);
-      box-shadow: 0 6px 14px rgba(10, 23, 51, 0.09);
-    }
-
-    .step-preview:focus-visible {
-      outline: 3px solid rgba(250, 26, 142, 0.25);
-      outline-offset: 3px;
-      border-color: var(--pink-dark);
-    }
-
-    .step-preview-number,
     .section-number {
       display: inline-grid;
       place-items: center;
@@ -136,22 +100,6 @@
       background: var(--pink-dark);
       color: var(--white);
       font-weight: 900;
-    }
-
-    .step-preview-number {
-      width: 27px;
-      height: 27px;
-      font-size: 0.84rem;
-    }
-
-    .step-preview strong {
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .step-preview span:last-child {
-      color: var(--muted);
-      font-size: 0.88rem;
     }
 
     .card {
@@ -226,9 +174,24 @@
       margin: 0;
     }
 
+    .section-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 2px;
+    }
+
     .section-title {
       font: inherit;
       font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 400;
+      line-height: 1.35;
     }
 
     .section-number {
@@ -526,13 +489,6 @@
       font-size: 0.7rem;
     }
 
-    @media (max-width: 900px) and (min-width: 721px) {
-      .steps {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-    }
-
     @media (max-width: 720px) {
       body {
         padding: 10px;
@@ -556,7 +512,10 @@
         padding: 18px;
       }
 
-      .steps,
+      .section-description {
+        font-size: 0.8rem;
+      }
+
       .fields,
       .fields.two,
       .period-selector,
@@ -590,40 +549,24 @@
       <p class="subtitle">
         Transmute raw scores, calculate the Class Participation (CP)–Examination weighted grade, combine Lecture and Lab/RLE grades, and determine the final rating.
       </p>
-
-      <div class="steps" aria-label="Calculator steps">
-        <a class="step-preview" href="#calculator-step-1" data-calculator-target="calculator-step-1">
-          <span class="step-preview-number">1</span>
-          <span><strong>Raw score</strong>Convert a score to its grade equivalent.</span>
-        </a>
-        <a class="step-preview" href="#calculator-step-2" data-calculator-target="calculator-step-2">
-          <span class="step-preview-number">2</span>
-          <span><strong>CP and exam</strong>Calculate the weighted grade.</span>
-        </a>
-        <a class="step-preview" href="#calculator-step-3" data-calculator-target="calculator-step-3">
-          <span class="step-preview-number">3</span>
-          <span><strong>Lec and Lab/RLE</strong>Calculate the combined course grade.</span>
-        </a>
-        <a class="step-preview" href="#calculator-step-4" data-calculator-target="calculator-step-4">
-          <span class="step-preview-number">4</span>
-          <span><strong>Final rating</strong>Combine two or three periodic grades.</span>
-        </a>
-      </div>
     </header>
 
     <section class="card calculator-section" id="calculator-step-1" aria-labelledby="step1-title">
       <h2 class="calculator-heading">
         <button class="calculator-toggle" type="button"
-                aria-expanded="true" aria-controls="step1-content">
+                aria-expanded="false" aria-controls="step1-content">
           <span class="section-heading">
             <span class="section-number" aria-hidden="true">1</span>
-            <span class="section-title" id="step1-title">Transmute a raw score</span>
+            <span class="section-copy">
+              <span class="section-title" id="step1-title">Transmute a raw score</span>
+              <span class="section-description">Convert a score to its grade equivalent.</span>
+            </span>
           </span>
-          <span class="toggle-icon" aria-hidden="true">−</span>
+          <span class="toggle-icon" aria-hidden="true">+</span>
         </button>
       </h2>
 
-      <div class="calculator-content" id="step1-content">
+      <div class="calculator-content" id="step1-content" hidden>
 <div class="fields">
         <div>
           <label for="cutoff">Cut-off</label>
@@ -682,7 +625,10 @@
                 aria-expanded="false" aria-controls="step2-content">
           <span class="section-heading">
             <span class="section-number" aria-hidden="true">2</span>
-            <span class="section-title" id="step2-title">Calculate the CP–Examination grade</span>
+            <span class="section-copy">
+              <span class="section-title" id="step2-title">Calculate the CP–Examination grade</span>
+              <span class="section-description">Calculate the weighted grade.</span>
+            </span>
           </span>
           <span class="toggle-icon" aria-hidden="true">+</span>
         </button>
@@ -738,7 +684,10 @@
                 aria-expanded="false" aria-controls="step3-content">
           <span class="section-heading">
             <span class="section-number" aria-hidden="true">3</span>
-            <span class="section-title" id="step3-title">Combine Lecture and Lab/RLE grades</span>
+            <span class="section-copy">
+              <span class="section-title" id="step3-title">Combine Lecture and Lab/RLE grades</span>
+              <span class="section-description">Calculate the combined course grade.</span>
+            </span>
           </span>
           <span class="toggle-icon" aria-hidden="true">+</span>
         </button>
@@ -817,7 +766,10 @@
                 aria-expanded="false" aria-controls="step4-content">
           <span class="section-heading">
             <span class="section-number" aria-hidden="true">4</span>
-            <span class="section-title" id="step4-title">Calculate the final rating</span>
+            <span class="section-copy">
+              <span class="section-title" id="step4-title">Calculate the final rating</span>
+              <span class="section-description">Combine two or three periodic grades.</span>
+            </span>
           </span>
           <span class="toggle-icon" aria-hidden="true">+</span>
         </button>
@@ -1210,12 +1162,6 @@
       });
     });
 
-    document.querySelectorAll("[data-calculator-target]").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        openCalculatorSection(link.dataset.calculatorTarget);
-      });
-    });
 
     function transferStep1(target) {
       if (!latestTransmutedGrade) return;
