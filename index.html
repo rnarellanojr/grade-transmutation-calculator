@@ -107,6 +107,24 @@
       border: 1px solid var(--border);
       border-radius: 11px;
       background: var(--pink-soft);
+      color: var(--navy);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease,
+                  background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .step-preview:hover {
+      transform: translateY(-2px);
+      border-color: var(--pink-dark);
+      background: var(--pink-light);
+      box-shadow: 0 6px 14px rgba(10, 23, 51, 0.09);
+    }
+
+    .step-preview:focus-visible {
+      outline: 3px solid rgba(250, 26, 142, 0.25);
+      outline-offset: 3px;
+      border-color: var(--pink-dark);
     }
 
     .step-preview-number,
@@ -141,11 +159,76 @@
       margin-bottom: 18px;
     }
 
+    .calculator-section {
+      padding: 0;
+      overflow: hidden;
+      scroll-margin-top: 16px;
+    }
+
+    .calculator-heading {
+      margin: 0;
+    }
+
+    .calculator-toggle {
+      display: flex;
+      width: 100%;
+      min-height: auto;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 20px 24px;
+      border: 0;
+      border-radius: 15px;
+      background: var(--white);
+      color: var(--navy);
+      text-align: left;
+    }
+
+    .calculator-toggle:hover {
+      background: var(--pink-soft);
+    }
+
+    .calculator-toggle[aria-expanded="true"] {
+      border-radius: 15px 15px 0 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--pink-soft);
+    }
+
+    .calculator-toggle:focus-visible {
+      position: relative;
+      z-index: 1;
+      outline-offset: -4px;
+    }
+
+    .calculator-content {
+      padding: 24px;
+    }
+
+    .toggle-icon {
+      display: inline-grid;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--pink-dark);
+      font-size: 1.15rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
     .section-heading {
       display: flex;
       align-items: center;
       gap: 11px;
-      margin-bottom: 6px;
+      margin: 0;
+    }
+
+    .section-title {
+      font: inherit;
+      font-weight: 800;
     }
 
     .section-number {
@@ -461,6 +544,18 @@
         padding: 19px;
       }
 
+      .calculator-section {
+        padding: 0;
+      }
+
+      .calculator-toggle {
+        padding: 16px 18px;
+      }
+
+      .calculator-content {
+        padding: 18px;
+      }
+
       .steps,
       .fields,
       .fields.two,
@@ -497,31 +592,39 @@
       </p>
 
       <div class="steps" aria-label="Calculator steps">
-        <div class="step-preview">
+        <a class="step-preview" href="#calculator-step-1" data-calculator-target="calculator-step-1">
           <span class="step-preview-number">1</span>
           <span><strong>Raw score</strong>Convert a score to its grade equivalent.</span>
-        </div>
-        <div class="step-preview">
+        </a>
+        <a class="step-preview" href="#calculator-step-2" data-calculator-target="calculator-step-2">
           <span class="step-preview-number">2</span>
           <span><strong>CP and exam</strong>Calculate the weighted grade.</span>
-        </div>
-        <div class="step-preview">
+        </a>
+        <a class="step-preview" href="#calculator-step-3" data-calculator-target="calculator-step-3">
           <span class="step-preview-number">3</span>
           <span><strong>Lec and Lab/RLE</strong>Calculate the combined course grade.</span>
-        </div>
-        <div class="step-preview">
+        </a>
+        <a class="step-preview" href="#calculator-step-4" data-calculator-target="calculator-step-4">
           <span class="step-preview-number">4</span>
           <span><strong>Final rating</strong>Combine two or three periodic grades.</span>
-        </div>
+        </a>
       </div>
     </header>
 
-    <section class="card" aria-labelledby="step1-title">
-      <div class="section-heading">
-        <span class="section-number" aria-hidden="true">1</span>
-        <h2 id="step1-title">Transmute a raw score</h2>
-      </div>
-      <div class="fields">
+    <section class="card calculator-section" id="calculator-step-1" aria-labelledby="step1-title">
+      <h2 class="calculator-heading">
+        <button class="calculator-toggle" type="button"
+                aria-expanded="true" aria-controls="step1-content">
+          <span class="section-heading">
+            <span class="section-number" aria-hidden="true">1</span>
+            <span class="section-title" id="step1-title">Transmute a raw score</span>
+          </span>
+          <span class="toggle-icon" aria-hidden="true">−</span>
+        </button>
+      </h2>
+
+      <div class="calculator-content" id="step1-content">
+<div class="fields">
         <div>
           <label for="cutoff">Cut-off</label>
           <select id="cutoff">
@@ -570,15 +673,23 @@
           <button class="secondary" id="useAsExam" type="button" disabled>Set as Exam</button>
         </div>
       </div>
+      </div>
     </section>
 
-    <section class="card" aria-labelledby="step2-title">
-      <div class="section-heading">
-        <span class="section-number" aria-hidden="true">2</span>
-        <h2 id="step2-title">Calculate the CP–Examination grade</h2>
-      </div>
+    <section class="card calculator-section" id="calculator-step-2" aria-labelledby="step2-title">
+      <h2 class="calculator-heading">
+        <button class="calculator-toggle" type="button"
+                aria-expanded="false" aria-controls="step2-content">
+          <span class="section-heading">
+            <span class="section-number" aria-hidden="true">2</span>
+            <span class="section-title" id="step2-title">Calculate the CP–Examination grade</span>
+          </span>
+          <span class="toggle-icon" aria-hidden="true">+</span>
+        </button>
+      </h2>
 
-      <div class="fields two">
+      <div class="calculator-content" id="step2-content" hidden>
+<div class="fields two">
         <div>
           <label for="cp">Class Participation grade</label>
           <select id="cp">
@@ -618,14 +729,23 @@
           <button class="secondary" id="useWeightedAsLab" type="button" disabled>Set as Lab/RLE</button>
         </div>
       </div>
+      </div>
     </section>
 
-    <section class="card" aria-labelledby="step3-title">
-      <div class="section-heading">
-        <span class="section-number" aria-hidden="true">3</span>
-        <h2 id="step3-title">Combine Lecture and Lab/RLE grades</h2>
-      </div>
-      <div class="fields">
+    <section class="card calculator-section" id="calculator-step-3" aria-labelledby="step3-title">
+      <h2 class="calculator-heading">
+        <button class="calculator-toggle" type="button"
+                aria-expanded="false" aria-controls="step3-content">
+          <span class="section-heading">
+            <span class="section-number" aria-hidden="true">3</span>
+            <span class="section-title" id="step3-title">Combine Lecture and Lab/RLE grades</span>
+          </span>
+          <span class="toggle-icon" aria-hidden="true">+</span>
+        </button>
+      </h2>
+
+      <div class="calculator-content" id="step3-content" hidden>
+<div class="fields">
         <div>
           <label for="courseCombination">Course-unit structure</label>
           <select id="courseCombination">
@@ -687,17 +807,24 @@
           <button class="secondary" id="useCourseAsFinal" type="button" disabled>Set as Final term</button>
         </div>
       </div>
-
+      </div>
     </section>
 
 
-    <section class="card" aria-labelledby="step4-title">
-      <div class="section-heading">
-        <span class="section-number" aria-hidden="true">4</span>
-        <h2 id="step4-title">Calculate the final rating</h2>
-      </div>
+    <section class="card calculator-section" id="calculator-step-4" aria-labelledby="step4-title">
+      <h2 class="calculator-heading">
+        <button class="calculator-toggle" type="button"
+                aria-expanded="false" aria-controls="step4-content">
+          <span class="section-heading">
+            <span class="section-number" aria-hidden="true">4</span>
+            <span class="section-title" id="step4-title">Calculate the final rating</span>
+          </span>
+          <span class="toggle-icon" aria-hidden="true">+</span>
+        </button>
+      </h2>
 
-      <div class="period-selector">
+      <div class="calculator-content" id="step4-content" hidden>
+<div class="period-selector">
         <div>
           <label for="gradingPeriods">Grading periods</label>
           <select id="gradingPeriods">
@@ -749,6 +876,7 @@
         <p class="result-label">Final rating</p>
         <p class="result-value" id="finalRatingResult">—</p>
         <p class="result-detail" id="finalRatingDetail">Choose the grading periods and periodic grades.</p>
+      </div>
       </div>
     </section>
 
@@ -1040,6 +1168,55 @@
       updateCourseState();
     }
 
+    const calculatorSections = Array.from(
+      document.querySelectorAll(".calculator-section")
+    );
+
+    function setCalculatorSectionState(section, isOpen) {
+      const toggle = section.querySelector(".calculator-toggle");
+      const content = section.querySelector(".calculator-content");
+      const icon = section.querySelector(".toggle-icon");
+
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      content.hidden = !isOpen;
+      icon.textContent = isOpen ? "−" : "+";
+    }
+
+    function openCalculatorSection(sectionId, shouldScroll = true) {
+      const target = document.getElementById(sectionId);
+      if (!target) return;
+
+      calculatorSections.forEach((section) => {
+        setCalculatorSectionState(section, section === target);
+      });
+
+      if (shouldScroll) {
+        requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    }
+
+    document.querySelectorAll(".calculator-toggle").forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const section = toggle.closest(".calculator-section");
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+
+        if (isOpen) {
+          setCalculatorSectionState(section, false);
+        } else {
+          openCalculatorSection(section.id, false);
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-calculator-target]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        openCalculatorSection(link.dataset.calculatorTarget);
+      });
+    });
+
     function transferStep1(target) {
       if (!latestTransmutedGrade) return;
 
@@ -1050,7 +1227,7 @@
       }
 
       updateWeightedState();
-      document.getElementById("step2-title").scrollIntoView({ behavior: "smooth", block: "start" });
+      openCalculatorSection("calculator-step-2");
     }
 
     function transferStep2(target) {
@@ -1063,7 +1240,7 @@
       }
 
       updateCourseState();
-      document.getElementById("step3-title").scrollIntoView({ behavior: "smooth", block: "start" });
+      openCalculatorSection("calculator-step-3");
     }
 
 
@@ -1174,7 +1351,7 @@
 
       finalTermGrade.value = latestCourseGrade;
       updateFinalRatingState();
-      document.getElementById("step4-title").scrollIntoView({ behavior: "smooth", block: "start" });
+      openCalculatorSection("calculator-step-4");
     }
 
     function resetAll() {
@@ -1182,6 +1359,7 @@
       clearWeightedSection();
       clearCourseSection();
       clearFinalRatingSection();
+      openCalculatorSection("calculator-step-1", false);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
