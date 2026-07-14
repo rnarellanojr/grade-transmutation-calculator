@@ -383,48 +383,81 @@
     }
 
     .footer {
-      padding: 14px 16px;
-      text-align: center;
-      border-top: 4px solid var(--pink);
+      padding: 8px 12px;
+      border-top: 3px solid var(--pink);
+      box-shadow: none;
     }
 
-    .credit-title,
-    .credit-name {
-      margin: 0;
-      font-weight: 900;
-    }
-
-    .credit-name {
-      margin-top: 2px;
-      color: var(--pink-dark);
-      font-size: 0.94rem;
-    }
-
-    .source-note {
-      margin: 5px 0 0;
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4px 8px;
       color: var(--muted);
       font-size: 0.72rem;
-      line-height: 1.3;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .footer-credit,
+    .version {
+      margin: 0;
+    }
+
+    .footer-credit strong {
+      color: var(--pink-dark);
+    }
+
+    .footer-separator {
+      color: var(--border);
+    }
+
+    .feedback-link {
+      color: var(--pink-dark);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .feedback-link:hover,
+    .feedback-link:focus {
+      color: var(--pink-darker);
+    }
+
+    .footer details {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      font-size: inherit;
       text-align: left;
     }
 
-    details {
-      max-width: 620px;
-      margin: 6px auto 0;
-      padding: 5px 8px;
+    .footer summary {
+      color: var(--pink-dark);
+      font-size: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      list-style-position: inside;
+      white-space: nowrap;
+    }
+
+    .footer details[open] {
+      flex-basis: 100%;
+      width: min(100%, 680px);
+      margin-top: 3px;
+      padding: 6px 8px;
       border: 1px solid var(--border);
       border-radius: 7px;
       background: var(--pink-soft);
-      text-align: left;
-      font-size: 0.74rem;
-      line-height: 1.3;
     }
 
-    summary {
-      color: var(--pink-dark);
-      font-size: 0.76rem;
-      font-weight: 800;
-      cursor: pointer;
+    .source-note {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.7rem;
+      line-height: 1.3;
     }
 
     .citation-row {
@@ -432,61 +465,36 @@
       grid-template-columns: 1fr auto;
       gap: 5px;
       align-items: center;
-      margin-top: 5px;
+      margin-top: 4px;
     }
 
     .citation {
       margin: 0;
-      padding: 5px 6px;
+      padding: 4px 6px;
       border: 1px solid var(--border);
       border-radius: 6px;
       background: var(--white);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       line-height: 1.25;
       overflow-wrap: anywhere;
     }
 
     .copy-status {
-      min-height: 14px;
-      margin: 4px 0 0;
+      min-height: 12px;
+      margin: 3px 0 0;
       color: var(--pink-dark);
-      font-size: 0.76rem;
+      font-size: 0.68rem;
       font-weight: 800;
-    }
-
-    .feedback-link {
-      margin: 6px 0 0;
-      color: var(--navy-soft);
-      font-size: 0.76rem;
-    }
-
-    .feedback-link a {
-      color: var(--pink-dark);
-      font-weight: 800;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    .feedback-link a:hover,
-    .feedback-link a:focus {
-      color: var(--pink-darker);
-    }
-
-
-    .footer details + details {
-      margin-top: 4px;
     }
 
     .citation-row .secondary {
-      min-height: 28px;
-      padding: 4px 8px;
-      font-size: 0.7rem;
+      min-height: 26px;
+      padding: 3px 7px;
+      font-size: 0.68rem;
     }
 
     .version {
-      margin: 7px 0 0;
-      color: var(--muted);
-      font-size: 0.7rem;
+      white-space: nowrap;
     }
 
     @media (max-width: 720px) {
@@ -495,9 +503,12 @@
       }
 
       .hero,
-      .card,
-      .footer {
+      .card {
         padding: 19px;
+      }
+
+      .footer {
+        padding: 8px 10px;
       }
 
       .calculator-section {
@@ -530,6 +541,11 @@
 
       .citation-row {
         grid-template-columns: 1fr;
+      }
+
+      .footer-bar {
+        gap: 3px 6px;
+        font-size: 0.69rem;
       }
     }
 
@@ -837,35 +853,44 @@
     </div>
 
     <footer class="footer">
-      <p class="credit-title">Designed by</p>
-      <p class="credit-name">Ricardo Jr. Arellano · Pharmacy Educator</p>
-
-      <p class="feedback-link">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSealRGco8JVT3uoVVOD8D0-lUAYxda2XDjCXLjpnr6eHTnW5w/viewform?usp=header"
-           target="_blank" rel="noopener noreferrer">
-          Send comments or suggestions through Google Forms
-        </a>
-      </p>
-
-      <details>
-        <summary>About this tool</summary>
-        <p class="source-note">
-          Transmutation tables are based on Centro Escolar University’s
-          <em>Evaluation and Reporting of Student Achievement</em> dated September 14, 2015.
-          AI-assisted coding was used. For educational use only; official institutional policies and records prevail.
+      <div class="footer-bar">
+        <p class="footer-credit">
+          Designed by <strong>Ricardo Jr. Arellano</strong> · Pharmacy Educator
         </p>
-      </details>
 
-      <details>
-        <summary>Suggested citation</summary>
-        <div class="citation-row">
-          <p class="citation" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 1.0) [Web application].</p>
-          <button class="secondary" id="copyCitationButton" type="button">Copy</button>
-        </div>
-        <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
-      </details>
+        <span class="footer-separator" aria-hidden="true">•</span>
 
-      <p class="version">Version 1.0 · 2026</p>
+        <a class="feedback-link"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSealRGco8JVT3uoVVOD8D0-lUAYxda2XDjCXLjpnr6eHTnW5w/viewform?usp=header"
+           target="_blank" rel="noopener noreferrer">
+          Feedback form
+        </a>
+
+        <span class="footer-separator" aria-hidden="true">•</span>
+
+        <details>
+          <summary>About</summary>
+          <p class="source-note">
+            Transmutation tables are based on Centro Escolar University’s
+            <em>Evaluation and Reporting of Student Achievement</em> dated September 14, 2015.
+            AI-assisted coding was used. For educational use only; official institutional policies and records prevail.
+          </p>
+        </details>
+
+        <span class="footer-separator" aria-hidden="true">•</span>
+
+        <details>
+          <summary>Citation</summary>
+          <div class="citation-row">
+            <p class="citation" id="citationText">Arellano, R. Jr. (2026). Grade Transmutation Calculator (Version 1.0) [Web application].</p>
+            <button class="secondary" id="copyCitationButton" type="button">Copy</button>
+          </div>
+          <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
+        </details>
+
+        <span class="footer-separator" aria-hidden="true">•</span>
+        <p class="version">Version 1.0 · 2026</p>
+      </div>
     </footer>
   </main>
 
