@@ -75,6 +75,7 @@
 
     .hero {
       padding: 28px;
+      background: var(--white);
       margin-bottom: 18px;
       text-align: center;
       border-top: 6px solid var(--pink);
@@ -120,6 +121,13 @@
       padding: 0;
       overflow: hidden;
       scroll-margin-top: 16px;
+      border: 2px solid #D98AB2;
+      border-radius: 16px;
+      box-shadow: 0 5px 16px rgba(10, 23, 51, 0.07);
+    }
+
+    .calculator-section:hover {
+      border-color: var(--pink-dark);
     }
 
     .calculator-heading {
@@ -146,8 +154,8 @@
     }
 
     .calculator-toggle[aria-expanded="true"] {
-      border-radius: 15px 15px 0 0;
-      border-bottom: 1px solid var(--border);
+      border-radius: 14px 14px 0 0;
+      border-bottom: 2px solid #D98AB2;
       background: var(--pink-soft);
     }
 
