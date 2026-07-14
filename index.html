@@ -54,6 +54,18 @@
 
     .hero,
     .card,
+    #resetAllButton {
+      background: #F1F3F5;
+      border-color: #D3D8DE;
+      color: var(--navy);
+    }
+
+    #resetAllButton:hover {
+      background: var(--pink-dark);
+      border-color: var(--pink-dark);
+      color: var(--white);
+    }
+
     .footer {
       background: var(--white);
       border: 1px solid var(--border);
@@ -86,13 +98,16 @@
       line-height: 1.15;
     }
 
-    .section-number {
+    .section-letter {
       display: inline-grid;
+      width: 34px;
+      height: 34px;
       place-items: center;
       flex: 0 0 auto;
       border-radius: 50%;
       background: var(--pink-dark);
       color: var(--white);
+      font-size: 0.84rem;
       font-weight: 900;
     }
 
@@ -188,10 +203,6 @@
       line-height: 1.35;
     }
 
-    .section-number {
-      width: 36px;
-      height: 36px;
-    }
 
     h2 {
       margin: 0;
@@ -563,9 +574,9 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step1-content">
           <span class="section-heading">
-            <span class="section-number" aria-hidden="true">1</span>
+            <span class="section-letter" aria-hidden="true">A</span>
             <span class="section-copy">
-              <span class="section-title" id="step1-title">Transmute a raw score</span>
+              <span class="section-title" id="step1-title">Raw-score transmutation</span>
               <span class="section-description">Convert a score to its grade equivalent.</span>
             </span>
           </span>
@@ -617,7 +628,7 @@
       </div>
 
       <div class="transfer">
-        <p>Use the result in Step 2, or select the grade manually.</p>
+        <p>Use this result in the CP–Exam calculator, or select the grade manually.</p>
         <div class="transfer-buttons">
           <button class="secondary" id="useAsCp" type="button" disabled>Set as CP</button>
           <button class="secondary" id="useAsExam" type="button" disabled>Set as Exam</button>
@@ -631,9 +642,9 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step2-content">
           <span class="section-heading">
-            <span class="section-number" aria-hidden="true">2</span>
+            <span class="section-letter" aria-hidden="true">B</span>
             <span class="section-copy">
-              <span class="section-title" id="step2-title">Calculate the CP–Examination grade</span>
+              <span class="section-title" id="step2-title">CP–Exam weighted grade</span>
               <span class="section-description">Calculate the weighted grade.</span>
             </span>
           </span>
@@ -649,7 +660,7 @@
             <option value="">Choose CP grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="hint">Select manually or transfer from Step 1.</span>
+          <span class="hint">Select manually or transfer from the Raw-score calculator.</span>
         </div>
 
         <div>
@@ -658,7 +669,7 @@
             <option value="">Choose examination grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="hint">Select manually or transfer from Step 1.</span>
+          <span class="hint">Select manually or transfer from the Raw-score calculator.</span>
         </div>
       </div>
 
@@ -676,7 +687,7 @@
       </div>
 
       <div class="transfer">
-        <p>For a course with Lab/RLE, use this result in Step 3.</p>
+        <p>For a course with Lab/RLE, use this result in the Lecture and Lab/RLE calculator.</p>
         <div class="transfer-buttons">
           <button class="secondary" id="useWeightedAsLecture" type="button" disabled>Set as Lecture</button>
           <button class="secondary" id="useWeightedAsLab" type="button" disabled>Set as Lab/RLE</button>
@@ -690,9 +701,9 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step3-content">
           <span class="section-heading">
-            <span class="section-number" aria-hidden="true">3</span>
+            <span class="section-letter" aria-hidden="true">C</span>
             <span class="section-copy">
-              <span class="section-title" id="step3-title">Combine Lecture and Lab/RLE grades</span>
+              <span class="section-title" id="step3-title">Lecture and Lab/RLE grade</span>
               <span class="section-description">Calculate the combined course grade.</span>
             </span>
           </span>
@@ -731,7 +742,7 @@
             <option value="">Choose Lecture grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="hint">Select manually or transfer from Step 2.</span>
+          <span class="hint">Select manually or transfer from the CP–Exam calculator.</span>
         </div>
 
         <div>
@@ -740,7 +751,7 @@
             <option value="">Choose Lab/RLE grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="hint">Select manually or transfer from Step 2.</span>
+          <span class="hint">Select manually or transfer from the CP–Exam calculator.</span>
         </div>
       </div>
 
@@ -758,7 +769,7 @@
       </div>
 
       <div class="transfer">
-        <p>Use this result as the Final term grade in Step 4.</p>
+        <p>Use this result as the Final term grade in the Final Rating calculator.</p>
         <div class="transfer-buttons">
           <button class="secondary" id="useCourseAsFinal" type="button" disabled>Set as Final term</button>
         </div>
@@ -772,9 +783,9 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step4-content">
           <span class="section-heading">
-            <span class="section-number" aria-hidden="true">4</span>
+            <span class="section-letter" aria-hidden="true">D</span>
             <span class="section-copy">
-              <span class="section-title" id="step4-title">Calculate the final rating</span>
+              <span class="section-title" id="step4-title">Final rating</span>
               <span class="section-description">Combine two or three periodic grades.</span>
             </span>
           </span>
@@ -820,7 +831,7 @@
             <option value="">Choose Final term grade</option>
             <option value="1.00">1.00</option><option value="1.25">1.25</option><option value="1.50">1.50</option><option value="1.75">1.75</option><option value="2.00">2.00</option><option value="2.25">2.25</option><option value="2.50">2.50</option><option value="2.75">2.75</option><option value="3.00">3.00</option><option value="3.50">3.50</option><option value="4.00">4.00</option><option value="5.00">5.00</option>
           </select>
-          <span class="hint">Select manually or transfer from Step 3.</span>
+          <span class="hint">Select manually or transfer from the Lecture and Lab/RLE calculator.</span>
         </div>
       </div>
 
