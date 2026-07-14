@@ -1303,15 +1303,9 @@
           ? 5.00
           : roundToNearestOfficialGrade(average);
 
-      const periodLabel = periods === "3" ? "Three grading periods" : "Two grading periods";
-
       finalRatingResult.textContent = finalRating.toFixed(2);
       finalRatingDetail.textContent =
-        periodLabel +
-        " · Sum " + sum.toFixed(2) +
-        (sum > passingLimit + 1e-9
-          ? " · Sum exceeds " + passingLimit.toFixed(2)
-          : "");
+        sum <= passingLimit + 1e-9 ? "Passed" : "Failed";
       finalRatingMessage.textContent = "";
     }
 
