@@ -99,19 +99,6 @@
       line-height: 1.15;
     }
 
-    .section-letter {
-      display: inline-grid;
-      width: 34px;
-      height: 34px;
-      place-items: center;
-      flex: 0 0 auto;
-      border-radius: 50%;
-      background: var(--pink-dark);
-      color: var(--white);
-      font-size: 0.84rem;
-      font-weight: 900;
-    }
-
     .card {
       padding: 26px;
       margin-bottom: 18px;
@@ -187,7 +174,6 @@
     .section-heading {
       display: flex;
       align-items: center;
-      gap: 11px;
       margin: 0;
     }
 
@@ -510,6 +496,19 @@
       white-space: nowrap;
     }
 
+
+    @media (min-width: 721px) {
+      .app {
+        min-height: calc(100vh - 40px);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer {
+        margin-top: auto;
+      }
+    }
+
     @media (max-width: 720px) {
       body {
         padding: 10px;
@@ -582,7 +581,6 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step1-content">
           <span class="section-heading">
-            <span class="section-letter" aria-hidden="true">A</span>
             <span class="section-copy">
               <span class="section-title" id="step1-title">Raw-score transmutation</span>
               <span class="section-description">Convert a score to its grade equivalent.</span>
@@ -650,7 +648,6 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step2-content">
           <span class="section-heading">
-            <span class="section-letter" aria-hidden="true">B</span>
             <span class="section-copy">
               <span class="section-title" id="step2-title">CP–Exam weighted grade</span>
               <span class="section-description">Calculate the weighted grade.</span>
@@ -709,7 +706,6 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step3-content">
           <span class="section-heading">
-            <span class="section-letter" aria-hidden="true">C</span>
             <span class="section-copy">
               <span class="section-title" id="step3-title">Lecture and Lab/RLE grade</span>
               <span class="section-description">Calculate the combined course grade.</span>
@@ -791,7 +787,6 @@
         <button class="calculator-toggle" type="button"
                 aria-expanded="false" aria-controls="step4-content">
           <span class="section-heading">
-            <span class="section-letter" aria-hidden="true">D</span>
             <span class="section-copy">
               <span class="section-title" id="step4-title">Final rating</span>
               <span class="section-description">Combine two or three periodic grades.</span>
