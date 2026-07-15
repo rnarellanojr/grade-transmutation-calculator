@@ -1334,7 +1334,9 @@
       clearWeightedSection();
       clearCourseSection();
       clearFinalRatingSection();
-      openCalculatorSection("calculator-step-1", false);
+      calculatorSections.forEach((section) => {
+        setCalculatorSectionState(section, false);
+      });
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
